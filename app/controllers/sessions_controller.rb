@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
 	  if user && user.authenticate(params[:session][:password])
 	    sign_in user
 	  else
-	    # They got something wrong
 	  end
   end
 
