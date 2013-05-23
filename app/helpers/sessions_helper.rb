@@ -10,6 +10,22 @@ module SessionsHelper
 	end
 
 	def current_user=(user)
-    	@current_user = user
- 	 end
+    @current_user = user
+  end
+
+  def current_user
+  	@current_user ||= User.find(session[:remember_token]) unless session[:remember_token].nil?
+	end
+
+	def signed_in?
+		!current_user.nil?
+	end
+
+	def same_user?(user)
+		redirect_to(root_path) unless current_user?(user)
+	end
+
+	def current_user?
+		user == current_user
+	end
 end

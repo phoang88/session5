@@ -1,0 +1,43 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.label :starts_at %>
+    <div class="row">
+      <div class="span4">
+        <%= f.date_select :starts_at, {}, {:class => 'input-small'} %>
+      </div>
+      <div class="span3">
+        <%= f.time_select :starts_at, {:default => {:hour => 9, :minute => 00}, :ampm => true, :minute_step => 15}, {:class => "input-small"} %>
+      </div>
+    </div>
+    <%= f.label :ends_at %>
+    <div class="row">
+      <div class="span4">
+        <%= f.date_select :ends_at, {}, {:class => 'input-small'} %>
+      </div>
+      <div class="span3">
+        <%= f.time_select :ends_at, {:default => {:hour => 10, :minute => 00}, :ignore_date => true, :ampm => true, :minute_step => 15}, {:class => "input-small"} %>
+      </div>
+    </div>
+
+    <%= f.label :street_address %>
+    <%= f.text_field :street_address %>
+
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+
+    <%= f.label :state %>
+    <%= f.text_field :state %>
+
+    <div class="clear"></div><%= f.submit class: "btn btn-large btn-primary" %>
+<% end %>
